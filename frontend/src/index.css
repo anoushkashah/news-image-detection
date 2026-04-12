@@ -53,7 +53,7 @@ img { display: block; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 52px;
+  height: 64px;
   padding: 0 2rem;
   border-bottom: 1px solid var(--pub-border);
   background: var(--pub-bg);
@@ -67,7 +67,7 @@ img { display: block; }
 
 .logo-v {
   font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
+  font-size: 1.7rem;
   font-weight: 700;
   font-style: italic;
   color: var(--pub-accent);
@@ -76,7 +76,7 @@ img { display: block; }
 
 .logo-erify {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--pub-text);
   letter-spacing: 0.18em;
@@ -91,7 +91,7 @@ img { display: block; }
 
 .header-sub {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.72rem;
   color: var(--pub-text-3);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -107,10 +107,10 @@ img { display: block; }
 
 .toggle-btn {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.62rem;
+  font-size: 0.75rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 6px 16px;
+  padding: 8px 20px;
   border: none;
   background: transparent;
   color: var(--pub-text-3);
@@ -143,7 +143,7 @@ img { display: block; }
 
 .sidebar-section-label {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.65rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--pub-text-3);
@@ -180,7 +180,7 @@ img { display: block; }
 .demo-info { display: flex; flex-direction: column; gap: 3px; }
 
 .demo-title {
-  font-size: 0.78rem;
+  font-size: 0.88rem;
   font-weight: 400;
   color: var(--pub-text);
   line-height: 1.35;
@@ -188,7 +188,7 @@ img { display: block; }
 
 .demo-sub {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.65rem;
   color: var(--pub-text-3);
   letter-spacing: 0.04em;
 }
@@ -460,18 +460,18 @@ img { display: block; }
 
 .score-label {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.55rem;
+  font-size: 0.72rem;
   letter-spacing: 0.1em;
   color: var(--pub-text-3);
   flex-shrink: 0;
 }
 
-.score-track { flex: 1; height: 2px; background: var(--pub-border-2); overflow: hidden; }
+.score-track { flex: 1; height: 4px; background: var(--pub-border-2); overflow: hidden; }
 .score-fill { height: 100%; transition: width 0.6s ease; }
 
 .score-value {
   font-family: 'Geist Mono', monospace;
-  font-size: 0.6rem;
+  font-size: 0.82rem;
   flex-shrink: 0;
   min-width: 2.5rem;
   text-align: right;
@@ -573,3 +573,70 @@ img { display: block; }
 .sidebar::-webkit-scrollbar { width: 3px; }
 .sidebar::-webkit-scrollbar-track { background: transparent; }
 .sidebar::-webkit-scrollbar-thumb { background: var(--pub-border); }
+
+.decision-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.875rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+}
+
+.decision-removed {
+  background: var(--pub-accent-dim);
+  border: 1px solid var(--pub-accent);
+  color: var(--pub-accent);
+}
+
+.decision-approved {
+  background: var(--pub-clean);
+  border: 1px solid var(--pub-clean-border);
+  color: var(--pub-clean-text);
+}
+
+.decision-icon { font-size: 0.85rem; flex-shrink: 0; }
+
+.decision-row {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--pub-border-2);
+  background: var(--pub-surface-2);
+}
+
+.decision-label {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--pub-text-3);
+  flex-shrink: 0;
+}
+
+.decision-buttons { display: flex; gap: 0.75rem; }
+
+.decision-btn {
+  font-family: 'Geist Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  border-radius: 2px;
+  border: 1px solid var(--pub-border-2);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.btn-approve { color: var(--pub-clean-text); border-color: var(--pub-clean-border); }
+.btn-approve:hover { background: var(--pub-clean); }
+.btn-active-approve { background: var(--pub-clean); border-color: var(--pub-clean-border); }
+
+.btn-remove { color: var(--pub-accent); border-color: var(--pub-accent); }
+.btn-remove:hover { background: var(--pub-accent-dim); }
+.btn-active-remove { background: var(--pub-accent-dim); border-color: var(--pub-accent); }

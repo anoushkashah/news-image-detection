@@ -1,11 +1,26 @@
+import { useState } from "react";
 import ImageCard from "./ImageCard";
 
 export default function PublisherView({ result }) {
+  const [decision, setDecision] = useState(null);
   const flaggedCount = result.verdicts?.filter((v) => v.verdict === "flagged").length || 0;
   const totalCount = result.verdicts?.length || 0;
 
   return (
     <div className="publisher-view">
+      {decision === "removed" && (
+        <div className="decision-banner decision-removed">
+          <span className="decision-icon">⚑</span>
+          <span className="decision-text">Marked for removal by human editor — article remains visible to readers pending final review</span>
+        </div>
+      )}
+      {decision === "approved" && (
+        <div className="decision-banner decision-approved">
+          <span className="decision-icon">✓</span>
+          <span className="decision-text">Approved by human editor — article cleared for publication with context notes</span>
+        </div>
+      )}
+
       <div className="pub-article-header">
         <div className="pub-meta-row">
           <span className="pub-author">{result.author}</span>
@@ -40,6 +55,26 @@ export default function PublisherView({ result }) {
         <div className="pub-recommendation">
           <p className="rec-eyebrow">Editorial Analysis</p>
           <p className="rec-body">{result.recommendation}</p>
+        </div>
+      )}
+
+      {result.requires_review && (
+        <div className="decision-row">
+          <p className="decision-label">Editor Decision</p>
+          <div className="decision-buttons">
+            <button
+              className={`decision-btn btn-approve ${decision === "approved" ? "btn-active-approve" : ""}`}
+              onClick={() => setDecision(decision === "approved" ? null : "approved")}
+            >
+              {decision === "approved" ? "✓ Approved" : "Approve with Context"}
+            </button>
+            <button
+              className={`decision-btn btn-remove ${decision === "removed" ? "btn-active-remove" : ""}`}
+              onClick={() => setDecision(decision === "removed" ? null : "removed")}
+            >
+              {decision === "removed" ? "⚑ Marked for Removal" : "Mark for Removal"}
+            </button>
+          </div>
         </div>
       )}
 

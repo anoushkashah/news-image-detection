@@ -14,7 +14,7 @@ export default function Header({ view, onViewChange }) {
           className={`toggle-btn ${view === "publisher" ? "toggle-active-pub" : ""}`}
           onClick={() => onViewChange("publisher")}
         >
-          Editor
+          Publisher
         </button>
         <span className="toggle-divider" />
         <button
