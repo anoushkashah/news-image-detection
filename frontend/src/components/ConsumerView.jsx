@@ -14,7 +14,7 @@ export default function ConsumerView({ result }) {
 
         <div className="con-rule" />
 
-        <p className="con-body">{result.article_text?.slice(0, 800)}{result.article_text?.length > 800 ? "..." : ""}</p>
+        <p className="con-body">{result.article_text}</p>
 
         <div className="con-images">
           {result.verdicts?.map((v, i) => (
