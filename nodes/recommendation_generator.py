@@ -28,17 +28,23 @@ def recommendation_generator(state: dict) -> dict:
             image_summaries.append(" ".join(parts))
 
     summary = "\n".join(image_summaries)
-    reasons_text = " and ".join(review_reasons).replace("ai_generated", "AI-generated content").replace("miscontextualized", "image miscontextualization")
 
-    prompt = f"""You are an editorial AI assistant helping a news editor review flagged content.
+    reasons_list = []
+    if "ai_generated" in review_reasons:
+        reasons_list.append("AI-generated imagery")
+    if "miscontextualized" in review_reasons:
+        reasons_list.append("image miscontextualization")
+    reasons_text = " and ".join(reasons_list)
+
+    prompt = f"""You are an editorial AI assistant helping a news editor or publishing platform review flagged image content.
 
 Article: "{headline}"
-Flagged for: {reasons_text}
+Flagged signals: {reasons_text}
 
 Per-image findings:
 {summary}
 
-Write a 3-4 sentence editorial recommendation for the human editor. Explain what was found, why it is concerning from a journalistic integrity standpoint, and what the editor should consider before publishing. Be specific and factual. Do not tell the editor what decision to make — present the findings and considerations clearly."""
+Write exactly 3 or 4 sentences summarizing what the automated analysis found. Reason about the actual severity of each finding — consider whether the flagged images would genuinely mislead a reader or whether they are reasonable editorial choices. Be neutral and specific. Do not recommend a course of action. Present the findings so the editor can make an informed decision."""
 
     try:
         response = client.chat.completions.create(
