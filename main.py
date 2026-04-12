@@ -19,7 +19,6 @@ async def verify(body: dict):
 
     async def stream():
         graph = build_graph()
-
         async for event in graph.astream({
             "article_url": url,
             "article_text": "",
@@ -28,13 +27,14 @@ async def verify(body: dict):
             "date": "",
             "images": [],
             "signals": [],
-            "verdicts": []
+            "verdicts": [],
+            "requires_review": False,
+            "review_reasons": [],
+            "recommendation": ""
         }):
             node = list(event.keys())[0]
             data = event[node]
-
-            yield f"data: {json.dumps({'node': node, 'data': data})}\n\n"
-
+            yield f"data: {json.dumps({'node': node, 'data': data}, default=str)}\n\n"
         yield "data: {\"node\": \"done\"}\n\n"
 
     return StreamingResponse(stream(), media_type="text/event-stream")
