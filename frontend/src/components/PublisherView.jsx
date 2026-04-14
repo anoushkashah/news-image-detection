@@ -80,7 +80,7 @@ export default function PublisherView({ result }) {
 
       <div className="pub-image-grid">
         {result.verdicts?.map((v, i) => (
-          <ImageCard key={i} verdict={v} index={i} />
+          <ImageCard key={i} verdict={v} index={i} articleDate={result.date} />
         ))}
       </div>
     </div>
