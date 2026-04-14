@@ -782,3 +782,21 @@ img { display: block; }
   max-width: 380px !important;
   color: var(--pub-text-3) !important;
 }
+
+.logo-wordmark {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  font-style: italic;
+  color: var(--pub-text);
+  letter-spacing: 0.02em;
+}
+
+.empty-logo {
+  width: 140px;
+  height: 140px;
+  margin-bottom: 2rem;
+}
+
+.logo-circle-pub { fill: var(--pub-bg); }
+.logo-circle-con { fill: var(--con-bg); }
