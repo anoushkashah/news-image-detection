@@ -3,22 +3,8 @@ import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 import PublisherView from "./components/PublisherView";
 import ConsumerView from "./components/ConsumerView";
+import VerifyMark from "./components/VerifyMark";
 import { useVerify } from "./hooks/useVerify";
-
-function VerifyMark({ bgColor }) {
-  return (
-    <svg className="empty-logo" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
-      <polygon points="10,10 24,10 40,58 16,58" fill="#e8e8e4"/>
-      <polygon points="70,10 56,10 40,58 64,58" fill="#e8e8e4"/>
-      <circle cx="40" cy="48" r="12" fill={bgColor} stroke="#c0392b" stroke-width="1.5"/>
-      <line x1="40" y1="39" x2="40" y2="43" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="40" y1="53" x2="40" y2="57" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="31" y1="48" x2="35" y2="48" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-      <line x1="45" y1="48" x2="49" y2="48" stroke="#c0392b" stroke-width="1.5" stroke-linecap="round"/>
-      <circle cx="40" cy="48" r="3" fill="#c0392b"/>
-    </svg>
-  );
-}
 
 export default function App() {
   const [view, setView] = useState("publisher");
@@ -49,7 +35,7 @@ export default function App() {
         <main className="main-content">
           {!selectedDemo && !loading && !result && (
             <div className="empty-state">
-              <VerifyMark bgColor={bgColor} />
+              <VerifyMark size={200} bgColor={bgColor} />
               <p className="empty-title">Select an article to analyze</p>
               <p className="empty-body">
                 Verify runs each image through AI detection, provenance search,
