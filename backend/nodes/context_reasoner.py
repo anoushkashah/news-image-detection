@@ -39,6 +39,50 @@ def fetch_image_base64(image_url: str) -> tuple:
     return b64, content_type
 
 
+def text_only_analysis(headline, article_text, alt_text, surrounding_text):
+    response = client.chat.completions.create(
+        model="openai/gpt-4o",
+        max_tokens=400,
+        messages=[{"role": "user", "content": f"""You are a news image verification analyst. The image itself could not be analyzed directly. Based only on the metadata below, reason carefully about whether this image is likely to match the article.
+
+ARTICLE HEADLINE: {headline}
+ARTICLE TEXT: {article_text[:600]}
+IMAGE ALT TEXT (this is what the publisher claims — treat with skepticism): {alt_text or "none"}
+SURROUNDING TEXT: {surrounding_text[:200]}
+
+Note: alt text is often written to match the article narrative regardless of what the image actually shows. Focus on whether the combination of article content and image metadata seems consistent and credible.
+
+Respond in exactly this format with no extra text:
+IMAGE_SHOWS: [what the metadata suggests this image likely actually shows]
+ARTICLE_CLAIMS: [what a reader would assume this image depicts]
+MATCH: [yes or no]
+CONTEXT_LABEL: [if no match: one factual sentence. if match: null]
+IMAGE_LABEL: [one factual sentence about what the image likely shows. Only add a second sentence if MATCH is no.]"""}]
+    )
+    return response.choices[0].message.content.strip()
+
+
+def parse_response(text: str) -> dict:
+    result = {
+        "context_match": None,
+        "context_reasoning": "",
+        "public_description": None,
+        "image_label": ""
+    }
+    for line in text.split("\n"):
+        line = line.strip()
+        if line.startswith("MATCH:"):
+            result["context_match"] = "yes" in line.lower()
+        elif line.startswith("CONTEXT_LABEL:"):
+            label = line.replace("CONTEXT_LABEL:", "").strip()
+            result["public_description"] = None if label == "null" else label
+        elif line.startswith("IMAGE_SHOWS:"):
+            result["context_reasoning"] = line.replace("IMAGE_SHOWS:", "").strip()
+        elif line.startswith("IMAGE_LABEL:"):
+            result["image_label"] = line.replace("IMAGE_LABEL:", "").strip()
+    return result
+
+
 def analyze_single_image(
     image_url: str,
     article_text: str,
@@ -96,26 +140,12 @@ IMAGE_LABEL: [exactly two sentences if mismatch, one sentence if match. Sentence
         )
 
         text = response.choices[0].message.content.strip()
-        result = {
-            "context_match": None,
-            "context_reasoning": "",
-            "public_description": None,
-            "image_label": ""
-        }
 
-        for line in text.split("\n"):
-            line = line.strip()
-            if line.startswith("MATCH:"):
-                result["context_match"] = "yes" in line.lower()
-            elif line.startswith("CONTEXT_LABEL:"):
-                label = line.replace("CONTEXT_LABEL:", "").strip()
-                result["public_description"] = None if label == "null" else label
-            elif line.startswith("IMAGE_SHOWS:"):
-                result["context_reasoning"] = line.replace("IMAGE_SHOWS:", "").strip()
-            elif line.startswith("IMAGE_LABEL:"):
-                result["image_label"] = line.replace("IMAGE_LABEL:", "").strip()
+        if any(phrase in text.lower() for phrase in ["sorry", "can't", "cannot", "i'm unable", "i am unable"]):
+            print(f"GPT-4o refused image analysis for {image_url}, falling back to text-only")
+            text = text_only_analysis(headline, article_text, alt_text, surrounding_text)
 
-        return result
+        return parse_response(text)
 
     except Exception as e:
         print(f"Context reasoning failed for {image_url}: {e}")
