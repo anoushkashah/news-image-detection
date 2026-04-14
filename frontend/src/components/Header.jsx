@@ -1,7 +1,12 @@
-export default function Header({ view, onViewChange }) {
+export default function Header({ view, onViewChange, sidebarOpen, onToggleSidebar }) {
   return (
     <header className="header">
       <div className="header-left">
+        <button className="sidebar-toggle" onClick={onToggleSidebar} title="Toggle sidebar">
+          <span className={`toggle-bar ${sidebarOpen ? "" : "bar-closed"}`} />
+          <span className={`toggle-bar ${sidebarOpen ? "" : "bar-closed"}`} />
+          <span className={`toggle-bar ${sidebarOpen ? "" : "bar-closed"}`} />
+        </button>
         <div className="logo">
           <span className="logo-v">V</span>
           <span className="logo-erify">ERIFY</span>

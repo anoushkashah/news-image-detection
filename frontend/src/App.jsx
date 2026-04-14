@@ -8,6 +8,7 @@ import { useVerify } from "./hooks/useVerify";
 export default function App() {
   const [view, setView] = useState("publisher");
   const [selectedDemo, setSelectedDemo] = useState(null);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
   const { loading, currentNode, result, error, analyze } = useVerify();
 
   function handleSelect(key) {
@@ -17,7 +18,7 @@ export default function App() {
 
   return (
     <div className={`app ${view === "consumer" ? "app-consumer" : "app-publisher"}`}>
-      <Header view={view} onViewChange={setView} />
+      <Header view={view} onViewChange={setView} sidebarOpen={sidebarOpen} onToggleSidebar={() => setSidebarOpen(!sidebarOpen)} />
 
       <div className="app-body">
         <Sidebar
@@ -25,6 +26,7 @@ export default function App() {
           currentNode={currentNode}
           loading={loading}
           onSelect={handleSelect}
+          isOpen={sidebarOpen}
         />
 
         <main className="main-content">

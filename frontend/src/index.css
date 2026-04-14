@@ -649,3 +649,36 @@ img { display: block; }
 .btn-remove { color: var(--pub-accent); border-color: var(--pub-accent); }
 .btn-remove:hover { background: var(--pub-accent-dim); }
 .btn-active-remove { background: var(--pub-accent-dim); border-color: var(--pub-accent); }
+
+.sidebar-open {
+  width: 256px;
+  transition: width 0.2s ease;
+}
+
+.sidebar-closed {
+  width: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: width 0.2s ease;
+}
+
+.sidebar-toggle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.toggle-bar {
+  display: block;
+  width: 16px;
+  height: 1.5px;
+  background: var(--pub-text-3);
+  transition: all 0.2s ease;
+}
+
+.toggle-bar:hover { background: var(--pub-text); }
