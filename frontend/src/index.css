@@ -975,3 +975,20 @@ img { display: block; }
 .provenance-link:hover {
   color: var(--pub-text);
 }
+
+.consumer-ai-badge {
+  position: absolute !important;
+  top: 0.75rem !important;
+  right: 0.75rem !important;
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-size: 0.68rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  padding: 6px 12px !important;
+  background: rgba(192, 57, 43, 0.92) !important;
+  color: #ffffff !important;
+  border-radius: 2px !important;
+  backdrop-filter: blur(4px) !important;
+  border: none !important;
+}
