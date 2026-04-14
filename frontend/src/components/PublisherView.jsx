@@ -60,7 +60,7 @@ export default function PublisherView({ result }) {
 
       {result.requires_review && (
         <div className="decision-row">
-          <p className="decision-label">Editor Decision</p>
+          <p className="decision-label">Publication Decision</p>
           <div className="decision-buttons">
             <button
               className={`decision-btn btn-approve ${decision === "approved" ? "btn-active-approve" : ""}`}
