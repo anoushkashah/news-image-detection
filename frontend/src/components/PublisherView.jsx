@@ -53,7 +53,7 @@ export default function PublisherView({ result }) {
 
       {result.recommendation && (
         <div className="pub-recommendation">
-          <p className="rec-eyebrow">Editorial Analysis</p>
+          <p className="rec-eyebrow">Image Analysis Summary</p>
           <p className="rec-body">{result.recommendation}</p>
         </div>
       )}
