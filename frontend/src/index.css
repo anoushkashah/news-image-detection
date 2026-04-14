@@ -755,3 +755,30 @@ img { display: block; }
 .score-value {
   font-size: 0.9rem !important;
 }
+
+.logo-v-svg {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+.empty-logo {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1.5rem;
+}
+
+.empty-title {
+  font-family: 'Figtree', sans-serif !important;
+  font-size: 1.5rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.02em !important;
+  text-transform: none !important;
+  color: var(--pub-text) !important;
+}
+
+.empty-body {
+  font-size: 0.9rem !important;
+  max-width: 380px !important;
+  color: var(--pub-text-3) !important;
+}
