@@ -133,7 +133,7 @@ IMAGE_SHOWS: [one sentence: what does this image actually depict]
 ARTICLE_CLAIMS: [one sentence: given the full article context, what would a reader reasonably assume this image depicts]
 MATCH: [yes or no]
 CONTEXT_LABEL: [if no match: one neutral factual sentence describing the actual subject of the image, suitable for a reader-facing correction. if match: null]
-IMAGE_LABEL: [exactly two sentences if mismatch, one sentence if match. Sentence 1: a factual caption describing what the image shows, its likely source, and when and where it was taken if known. Sentence 2: only include if MATCH is no — one sentence describing what event or context the image actually comes from and why it differs from the article. If MATCH is yes, write only Sentence 1.]"""
+IMAGE_LABEL: [exactly two sentences if mismatch, one sentence if match. Sentence 1: a factual caption describing what the image shows, its likely source, and when and where it was taken if known. If the AI generation score is above 0.85, begin Sentence 1 with "This image appears to be AI-generated." Sentence 2: only include if MATCH is no — one sentence describing what event or context the image actually comes from and why it differs from the article, noting if it is AI-generated where relevant. If MATCH is yes, write only Sentence 1.]"""
                     }
                 ]
             }]

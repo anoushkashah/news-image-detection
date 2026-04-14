@@ -22,7 +22,7 @@ def recommendation_generator(state: dict) -> dict:
         if v["verdict"] == "flagged":
             parts = [f"Image {i+1}:"]
             if v.get("is_ai_generated"):
-                parts.append(f"AI-generated with {round(v['ai_score']*100)}% confidence.")
+                parts.append(f"Flagged as AI-generated with {round(v['ai_score']*100)}% confidence — this image was likely never a real photograph.")
             if v.get("context_match") is False and v.get("public_description"):
                 parts.append(f"Context mismatch: {v['public_description']}")
             image_summaries.append(" ".join(parts))
