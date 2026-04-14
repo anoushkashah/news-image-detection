@@ -808,3 +808,12 @@ img { display: block; }
 .app-consumer .empty-title {
   color: var(--con-text) !important;
 }
+
+.logo-wordmark {
+  font-family: 'Figtree', sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.08em !important;
+  color: #c0392b !important;
+}
