@@ -800,3 +800,11 @@ img { display: block; }
 
 .logo-circle-pub { fill: var(--pub-bg); }
 .logo-circle-con { fill: var(--con-bg); }
+
+.empty-title {
+  color: var(--pub-text) !important;
+}
+
+.app-consumer .empty-title {
+  color: var(--con-text) !important;
+}
