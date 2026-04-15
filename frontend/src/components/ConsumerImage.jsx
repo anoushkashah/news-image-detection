@@ -1,12 +1,29 @@
 export default function ConsumerImage({ verdict }) {
+  const showContextBar = verdict.public_description || verdict.is_ai_generated;
+
+  const contextMessage = () => {
+    if (verdict.is_ai_generated && verdict.public_description) {
+      return `This image was flagged as AI-generated and may not depict a real event. ${verdict.public_description}`;
+    }
+    if (verdict.is_ai_generated) {
+      return "This image was flagged as AI-generated and may not depict a real photograph or event.";
+    }
+    if (verdict.public_description) {
+      return verdict.public_description;
+    }
+    return null;
+  };
+
+  const barLabel = verdict.is_ai_generated ? "AI Notice" : "Context";
+
   return (
     <figure className="consumer-figure">
-      {verdict.public_description && (
-        <div className="consumer-context-bar">
-          <span className="context-bar-mark">!</span>
+      {showContextBar && (
+        <div className={`consumer-context-bar ${verdict.is_ai_generated ? "context-bar-ai" : "context-bar-mismatch"}`}>
+          <span className="context-bar-mark">{verdict.is_ai_generated ? "AI" : "!"}</span>
           <p className="context-bar-text">
-            <span className="note-label">Context: </span>
-            {verdict.public_description}
+            <span className="note-label">{barLabel}: </span>
+            {contextMessage()}
           </p>
         </div>
       )}

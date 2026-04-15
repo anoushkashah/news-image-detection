@@ -1041,3 +1041,25 @@ img { display: block; }
   line-height: 1.5;
   color: var(--con-text-2);
 }
+
+.context-bar-ai {
+  background: rgba(192, 57, 43, 0.06) !important;
+  border-left-color: #c0392b !important;
+}
+
+.context-bar-ai .context-bar-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: #c0392b !important;
+  font-weight: 500;
+}
+
+.context-bar-ai .note-label {
+  color: #c0392b !important;
+}
+
+.context-bar-mismatch {
+  background: var(--con-note-bg) !important;
+  border-left-color: var(--con-note-border) !important;
+}
