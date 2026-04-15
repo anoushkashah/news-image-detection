@@ -1063,3 +1063,9 @@ img { display: block; }
   background: var(--con-note-bg) !important;
   border-left-color: var(--con-note-border) !important;
 }
+
+.rec-divider {
+  height: 1px;
+  background: var(--pub-border-2);
+  margin: 1rem 0;
+}
