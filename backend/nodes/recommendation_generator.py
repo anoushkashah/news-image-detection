@@ -71,3 +71,4 @@ After the chosen opening, explain why in the same sentence, being specific about
         recommendation = "Automated analysis flagged issues with this article's images. Please review the per-image breakdown above before publishing."
 
     return {"recommendation": recommendation, "editorial_call": ""}
+# force rebuild
