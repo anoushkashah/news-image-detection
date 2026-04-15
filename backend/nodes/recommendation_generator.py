@@ -65,6 +65,7 @@ After the chosen opening, explain why in the same sentence, being specific about
             messages=[{"role": "user", "content": prompt}]
         )
         recommendation = response.choices[0].message.content.strip()
+        recommendation = recommendation.replace("\n\n", "||BREAK||")
     except Exception as e:
         print(f"Recommendation generation failed: {e}")
         recommendation = "Automated analysis flagged issues with this article's images. Please review the per-image breakdown above before publishing."
