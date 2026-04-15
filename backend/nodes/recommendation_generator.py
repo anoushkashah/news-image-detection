@@ -55,7 +55,7 @@ Do not use any line breaks or blank lines. Write all 4 sentences as one continuo
     try:
         response = client.chat.completions.create(
             model="openai/gpt-4o",
-            max_tokens=400,
+            max_tokens=600,
             messages=[{"role": "user", "content": prompt}]
         )
         recommendation = response.choices[0].message.content.strip()
