@@ -44,19 +44,13 @@ Flagged signals: {reasons_text}
 Per-image findings:
 {summary}
 
-Write exactly 4 sentences structured as follows:
-
-The first 3 sentences summarize what the automated analysis found. Reason about the actual severity of each finding — consider whether the flagged images would genuinely mislead a reader or whether they are reasonable editorial choices. Be neutral and specific.
-
-Then add a blank line.
-
-The 4th sentence is the publication recommendation. It must begin with exactly one of these four options — choose whichever is most appropriate:
+Write exactly 4 sentences in a single paragraph with no line breaks. The first 3 sentences summarize what the automated analysis found, reasoning about the actual severity of each finding and whether the flagged images would genuinely mislead a reader. The 4th sentence must begin with exactly one of these four options:
 - "This article can be kept as is." — if flagged images do not materially mislead readers and the article's integrity is intact.
 - "This article can be kept with contextual labels added to flagged images." — if images are real but miscontextualized in a way that could confuse readers without being outright deceptive.
 - "This article can be kept with AI-generated labels added to flagged images for public transparency." — if images are AI-generated but the article text is accurate and imagery is illustrative rather than deceptive.
-- "This article should be removed for misinformation and/or falsified imagery." — only if images are AI-generated AND fundamentally misrepresent real events in a way that would actively deceive readers. Do not recommend removal solely for miscontextualized real photos.
+- "This article should be removed for misinformation and/or falsified imagery." — only if images are AI-generated AND fundamentally misrepresent real events in a way that would actively deceive readers.
 
-After the chosen opening, explain why in the same sentence, being specific about the nature of the findings and their impact on reader understanding."""
+Do not use any line breaks or blank lines. Write all 4 sentences as one continuous paragraph."""
 
     try:
         response = client.chat.completions.create(
@@ -65,10 +59,9 @@ After the chosen opening, explain why in the same sentence, being specific about
             messages=[{"role": "user", "content": prompt}]
         )
         recommendation = response.choices[0].message.content.strip()
-        recommendation = recommendation.replace("\n\n", "||BREAK||")
+        recommendation = recommendation.replace("\n\n", " ").replace("\n", " ")
     except Exception as e:
         print(f"Recommendation generation failed: {e}")
         recommendation = "Automated analysis flagged issues with this article's images. Please review the per-image breakdown above before publishing."
 
     return {"recommendation": recommendation, "editorial_call": ""}
-# force rebuild

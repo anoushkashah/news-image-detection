@@ -54,11 +54,7 @@ export default function PublisherView({ result }) {
       {result.recommendation && (
         <div className="pub-recommendation">
           <p className="rec-eyebrow">Image Analysis Summary</p>
-          {result.recommendation.split("||BREAK||").map((para, i) => (
-            <p key={i} className={i === 0 ? "rec-body" : "rec-body rec-body-recommendation"}>
-              {para}
-            </p>
-          ))}
+          <p className="rec-body">{result.recommendation}</p>
         </div>
       )}
 
