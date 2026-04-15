@@ -55,13 +55,6 @@ export default function PublisherView({ result }) {
         <div className="pub-recommendation">
           <p className="rec-eyebrow">Image Analysis Summary</p>
           <p className="rec-body">{result.recommendation}</p>
-          {result.editorial_call && (
-            <>
-              <div className="rec-divider" />
-              <p className="rec-eyebrow" style={{ color: "var(--pub-accent)" }}>Publication Recommendation</p>
-              <p className="rec-body" style={{ color: "#ffffff" }}>{result.editorial_call}</p>
-            </>
-          )}
         </div>
       )}
 
