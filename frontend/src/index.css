@@ -1069,3 +1069,7 @@ img { display: block; }
   background: var(--pub-border-2);
   margin: 1rem 0;
 }
+
+.rec-body {
+  white-space: pre-line !important;
+}
