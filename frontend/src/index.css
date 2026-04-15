@@ -992,3 +992,27 @@ img { display: block; }
   backdrop-filter: blur(4px) !important;
   border: none !important;
 }
+
+.pub-editorial-call {
+  background: var(--pub-surface-2);
+  border: 1px solid var(--pub-border-2);
+  border-left: 3px solid var(--pub-accent);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.call-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--pub-accent);
+  margin-bottom: 0.6rem;
+}
+
+.call-body {
+  font-family: 'Figtree', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: #ffffff;
+}

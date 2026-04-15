@@ -58,6 +58,13 @@ export default function PublisherView({ result }) {
         </div>
       )}
 
+      {result.editorial_call && (
+        <div className="pub-editorial-call">
+          <p className="call-eyebrow">Publication Recommendation</p>
+          <p className="call-body">{result.editorial_call}</p>
+        </div>
+      )}
+
       {result.requires_review && (
         <div className="decision-row">
           <p className="decision-label">Publication Decision</p>
