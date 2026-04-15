@@ -11,7 +11,7 @@ client = OpenAI(
 
 def recommendation_generator(state: dict) -> dict:
     if not state.get("requires_review"):
-        return {"recommendation": ""}
+        return {"recommendation": "", "editorial_call": ""}
 
     verdicts = state.get("verdicts", [])
     headline = state.get("headline", "")
@@ -36,7 +36,7 @@ def recommendation_generator(state: dict) -> dict:
         reasons_list.append("image miscontextualization")
     reasons_text = " and ".join(reasons_list)
 
-    prompt = f"""You are an editorial AI assistant helping a news editor or publishing platform review flagged image content.
+    summary_prompt = f"""You are an editorial AI assistant helping a news editor or publishing platform review flagged image content.
 
 Article: "{headline}"
 Flagged signals: {reasons_text}
@@ -44,17 +44,43 @@ Flagged signals: {reasons_text}
 Per-image findings:
 {summary}
 
-Write exactly 3 or 4 sentences summarizing what the automated analysis found. Reason about the actual severity of each finding — consider whether the flagged images would genuinely mislead a reader or whether they are reasonable editorial choices. Be neutral and specific. Do not recommend a course of action. Present the findings so the editor can make an informed decision."""
+Write exactly 3 sentences summarizing what the automated analysis found. Reason about the actual severity of each finding — consider whether the flagged images would genuinely mislead a reader or whether they are reasonable editorial choices. Be neutral and specific. Do not recommend a course of action. Present the findings so the editor can make an informed decision."""
+
+    call_prompt = f"""You are an editorial AI assistant helping a news editor make a publication decision.
+
+Article: "{headline}"
+Flagged signals: {reasons_text}
+
+Per-image findings:
+{summary}
+
+Based on the severity of these findings, write exactly 2 sentences making a concrete publication recommendation. You must choose exactly one of these four options as your opening:
+
+- "This article can be kept as is." — use if the flagged images do not materially mislead readers and the article's integrity is intact.
+- "This article can be kept with contextual labels added to flagged images." — use if the images are real but miscontextualized in a way that could confuse readers without being outright deceptive.
+- "This article can be kept with AI-generated labels added to flagged images for public transparency." — use if images are AI-generated but the article text itself is accurate and the imagery is illustrative rather than deceptive.
+- "This article should be removed for misinformation and/or falsified imagery." — use only if the images are both AI-generated and fundamentally misrepresent the events described, in a way that would actively deceive readers about real-world facts.
+
+Then write one sentence explaining why, being specific about the nature of the findings and their impact on reader understanding."""
 
     try:
-        response = client.chat.completions.create(
+        summary_response = client.chat.completions.create(
             model="openai/gpt-4o",
             max_tokens=300,
-            messages=[{"role": "user", "content": prompt}]
+            messages=[{"role": "user", "content": summary_prompt}]
         )
-        recommendation = response.choices[0].message.content.strip()
+        recommendation = summary_response.choices[0].message.content.strip()
+
+        call_response = client.chat.completions.create(
+            model="openai/gpt-4o",
+            max_tokens=200,
+            messages=[{"role": "user", "content": call_prompt}]
+        )
+        editorial_call = call_response.choices[0].message.content.strip()
+
     except Exception as e:
         print(f"Recommendation generation failed: {e}")
         recommendation = "Automated analysis flagged issues with this article's images. Please review the per-image breakdown above before publishing."
+        editorial_call = ""
 
-    return {"recommendation": recommendation}
+    return {"recommendation": recommendation, "editorial_call": editorial_call}

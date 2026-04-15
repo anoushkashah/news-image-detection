@@ -33,7 +33,8 @@ async def verify(body: dict):
             "verdicts": [],
             "requires_review": False,
             "review_reasons": [],
-            "recommendation": ""
+            "recommendation": "",
+            "editorial_call": ""
         }):
             node = list(event.keys())[0]
             data = event[node]

@@ -12,3 +12,4 @@ class VerifyState(TypedDict):
     requires_review: bool
     review_reasons: list[str]
     recommendation: str
+    editorial_call: str
