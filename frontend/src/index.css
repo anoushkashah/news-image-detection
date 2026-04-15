@@ -1016,3 +1016,28 @@ img { display: block; }
   line-height: 1.7;
   color: #ffffff;
 }
+
+.consumer-context-bar {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  padding: 0.65rem 0.875rem;
+  background: var(--con-note-bg);
+  border-left: 2px solid var(--con-note-border);
+  margin-bottom: 0;
+}
+
+.context-bar-mark {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  color: var(--con-note);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.context-bar-text {
+  font-family: 'Figtree', sans-serif;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  color: var(--con-text-2);
+}
